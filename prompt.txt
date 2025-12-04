@@ -1,0 +1,214 @@
+----------------------------------------------------------------------------------------------------------------------------------------------
+Could you please complete this scenario with the below html page.
+Add the page model and the flow step associated.
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+<div class="container" style="margin: 50px auto 50px auto">
+	<h1 class="h1 text-success">Prospect</h1>
+	<div style="margin: 5px">
+		<div>By Customer Id</div>
+		<input type="text" name="prospectId" id="prospectId">
+	</div>
+	<div style="margin: 5px">
+		<div> Or search By Name: </div>
+		<input type="text" name="prospectName" id="prospectName">
+		<button onclick="searchProspect(document.getElementById('prospectName').value)">Search</button>
+	</div>
+	<div>
+		<p class="alert-info" id="info">
+		</p>
+		<p class="alert-danger" id="error">
+		</p>
+	</div>
+
+	<div class="fa-pull-right">
+		<button onclick="window.location.href='underwriting.html'">Next Step</button>
+	</div>
+</div>
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+Could you please complete this scenario with the below html page.
+Add the page model and the flow step associated.
+Guess the right value to fill in each field with the label.
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+<div class="container" style="margin: 50px auto 50px auto">
+        <h1 class="h1 text-success">Fill the home details</h1>
+
+
+        <div class="bg-light container" style="padding: 20px; border-radius: 20px">
+            <table class="table-active">
+                <tbody><tr>
+                    <td colspan="2">
+                        <h2 class="h2 text-capitalize">Home Location</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="form-label">Street Number:</span>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" name="streetNumber">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="form-label">Street Name:</span>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" name="streetName">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="form-label">City:</span>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" name="city">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="form-label">Post Code:</span>
+                    </td>
+                    <td>
+                        <input class="form-control" type="number" name="postcode">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="form-label">Region:</span>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" name="region">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="form-label">Country:</span>
+                    </td>
+                    <td>
+                        <select class="form-select" name="country">
+                            <option value="--">-- select --</option>
+                            <option value="fr">France</option>
+                            <option value="ma">Monaco</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody></table>
+        </div>
+        <p></p>
+
+        <div class="bg-light container" style="padding: 20px; border-radius: 20px">
+            <table class="table-active">
+                <tbody><tr>
+                    <td colspan="2">
+                        <h2 class="h2 text-capitalize">Home Details</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                        <h3 class="h3 text-capitalize">Type of home:</h3>
+
+                    </td>
+                    <td>
+                        <input type="radio" class="form-check-input m-sm-1" name="homeType" id="home-type-appt" value="apartment"><label class="form-check-label m-sm-1" for="home-type-appt"> Apartment</label>
+                        <input type="radio" class="form-check-input m-sm-1" name="homeType" id="home-type-house" value="house"><label class="form-check-label m-sm-1" for="home-type-house"> House</label>
+                    </td>
+                </tr>
+            </tbody></table>
+
+            <table class="table-active" id="house" style="display: none">
+                <tbody><tr>
+                    <td colspan="2">
+                        <h3 class="h3 text-capitalize">House caracteristics</h3>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td><span class="form-label">Nomber of floors:</span></td>
+                    <td><input class="form-control" type="number" name="floors"></td>
+                </tr>
+                <tr>
+                    <td><span class="form-label">Surface of backyard:</span></td>
+                    <td><input class="form-control" type="number" name="surface-backyard"></td>
+                </tr>
+                <tr>
+                    <td><span class="form-label">Do you have an swimming pool ?</span></td>
+                    <td>
+                        <input type="radio" class="form-check-input m-sm-1" name="pool" id="pool-yes" value="yes"><label class="form-check-label m-sm-1" for="pool-yes"> Yes</label>
+                        <input type="radio" class="form-check-input m-sm-1" name="pool" id="pool-no" value="no"><label class="form-check-label m-sm-1" for="pool-no"> No</label>
+                    </td>
+                </tr>
+
+
+            </tbody></table>
+
+            <table class="table-active" id="apartment" style="display: none">
+                <tbody><tr>
+                    <td colspan="2">
+                        <h3 class="h3 text-capitalize">Apartment Details</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="form-label">Total floors of the building</span></td>
+                    <td>
+                        <select class="form-select" name="total-floors">
+                            <option value="&lt;3">Less than 3 floors</option>
+                            <option value="4to7">Between 4 to 7 floors</option>
+                            <option value="8to11">Between 8 to 11 floors</option>
+                            <option value="&gt;12">More than 12 floors</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="form-label">Your apartment is at (x)th floor:</span></td>
+                    <td><input class="form-control" type="number" name="my-floors"></td>
+                </tr>
+
+                <tr>
+                    <td><span class="form-label">Do you have an elevator ?</span></td>
+                    <td>
+                        <input type="radio" class="form-check-input m-sm-1" name="elevator" id="elevator-yes" value="yes"><label class="form-check-label m-sm-1" for="elevator-yes"> Yes</label>
+                        <input type="radio" class="form-check-input m-sm-1" name="elevator" id="elevator-no" value="no"><label class="form-check-label m-sm-1" for="elevator-no"> No</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+            </tbody></table>
+
+            <table id="commun" class="table-active">
+                <tbody><tr>
+                    <td><span class="form-label">Nomber of rooms:</span></td>
+                    <td>
+                        <select class="form-select" name="rooms">
+                            <option value="1">1 Room</option>
+                            <option value="2">2 Rooms</option>
+                            <option value="3">3 Rooms</option>
+                            <option value="4">4 Rooms</option>
+                            <option value="5">5+ Rooms</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="form-label">Surface (sq meters):</span></td>
+                    <td><input class="form-control" name="surface"></td>
+                </tr>
+            </tbody></table>
+
+        </div>
+        <div>
+            <p class="alert-info" id="info">
+            </p>
+            <p class="alert-danger" id="error">
+            </p>
+        </div>
+        <div class="fa-pull-right">
+            <button onclick="window.location.href='antecedent.html'">Next Step</button>
+        </div>
+    </div>

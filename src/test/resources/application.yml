@@ -1,0 +1,30 @@
+webengineConfiguration:
+    name: project-jtia-automation
+    platformName: WINDOWS
+    browserName: CHROME
+    appiumConfiguration:
+        gridConnection: https://hub-cloud.browserstack.com/wd/hub
+        userName: XXXXXXX
+        password: XXXXXXX
+        localTesting:
+            activate: false
+            arguments:
+                force: true
+                forcelocal: true
+                binarypath: C:\\BrowserStack\\BrowserStackLocal.exe
+                localIdentifier: XXXXYYYY
+        capabilities:
+            desiredCapabilitiesMap:
+                geoLocation: FR
+                deviceName: Samsung Galaxy S20 Ultra
+                osVersion: 10.0
+                projectName: solaris-automation
+                buildName: solaris-automation-mobile
+                sessionName: Samsung
+                local: true
+                networkLogs: true
+                localIdentifier: XXXXYYYY
+application-configuration:
+    values:
+        url: https://www.google.com
+        varAzure: Charlie
