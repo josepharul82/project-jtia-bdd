@@ -16,3 +16,5 @@ Feature: insurance flow test
     Then I should see the prospect ID "82918723"
     And I should see the info message containing "The customerId of customer"
     When I click on the next step button
+    Then I see the home details page
+
