@@ -17,4 +17,17 @@ Feature: insurance flow test
     And I should see the info message containing "The customerId of customer"
     When I click on the next step button
     Then I see the home details page
+    When I fill the street number with "123"
+    And I fill the street name with "Avenue des Champs-Élysées"
+    And I fill the city with "Paris"
+    And I fill the postcode with "75008"
+    And I fill the region with "Île-de-France"
+    And I select country "fr"
+    And I select home type "apartment"
+    And I select total floors of building "4to7"
+    And I fill my apartment floor with "3"
+    And I select elevator option "yes"
+    And I select number of rooms "3"
+    And I fill the surface with "85"
+    And I click on the home details next button
 
