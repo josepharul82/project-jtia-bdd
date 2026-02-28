@@ -1,0 +1,62 @@
+# ═══════════════════════════════════════════════════════════════════════════
+#  Profile: dev  –  local development overrides
+#  Activate: SPRING_PROFILES_ACTIVE=dev
+#  NEVER use these settings in production.
+# ═══════════════════════════════════════════════════════════════════════════
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: bff-dev
+            client-secret: ${OAUTH2_CLIENT_SECRET:change-me}
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8180/realms/dev
+
+bff:
+  cookie:
+    # ⚠ Dev-only fixed key – NEVER use in production.
+    # Generate your own: openssl rand -base64 32
+    encryption-key: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+    secure: false        # ⚠ allows cookies over http://localhost
+
+  cors:
+    allowed-origins:
+      - http://localhost:5000
+      - http://localhost:9090
+
+  proxy:
+    backend-url: http://localhost:8080
+    connect-timeout-ms: 5000
+    read-timeout-ms: 30000
+
+  headers:
+    # Relaxed CSP for React hot-reload
+    content-security-policy: >
+      default-src 'self';
+      script-src 'self' 'unsafe-eval' 'unsafe-inline';
+      style-src 'self' 'unsafe-inline';
+      connect-src 'self' ws://localhost:* http://localhost:*;
+      img-src 'self' data:;
+      frame-ancestors 'none'
+
+management:
+  server:
+    port: 9090
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    root: INFO
+    com.bff: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.web: DEBUG

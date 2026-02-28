@@ -1,0 +1,112 @@
+server:
+  port: 9090
+  # Tomcat hardening
+  tomcat:
+    connection-timeout: 5000          # ms – reject slow clients
+    max-connections: 200
+    threads:
+      max: 50
+      min-spare: 10
+    remoteip:
+      remote-ip-header: X-Forwarded-For
+      protocol-header: X-Forwarded-Proto
+  compression:
+    enabled: true
+    min-response-size: 1024
+
+spring:
+  application:
+    name: bff
+
+  # ── NO session store – fully stateless ──────────────────────────────────
+  # Do NOT add spring-session here.
+
+  # ── OAuth2 Client ────────────────────────────────────────────────────────
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: ${OAUTH2_CLIENT_ID:my-bff-client}
+            client-secret: ${OAUTH2_CLIENT_SECRET}          # no default – must be set
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope:
+              - openid
+              - profile
+              - email
+        provider:
+          keycloak:
+            issuer-uri: ${OAUTH2_ISSUER_URI}                # no default – must be set
+
+# ── BFF custom properties ────────────────────────────────────────────────
+bff:
+  oauth2:
+    registration-id: ${OAUTH2_REGISTRATION_ID:keycloak}
+
+  cookie:
+    # AES-256 key (32 bytes, Base64). Generate: openssl rand -base64 32
+    # NEVER hardcode – inject via environment variable or secrets manager.
+    encryption-key: ${BFF_COOKIE_ENCRYPTION_KEY}            # no default – must be set
+    secure: true                                            # false ONLY in dev
+    token-cookie-name: BFF_TOKEN
+    csrf-cookie-name: XSRF-TOKEN
+    saved-request-cookie-name: BFF_SAVED_REQUEST
+    max-age-seconds: 3600                                   # align with IdP access-token TTL
+
+  cors:
+    allowed-origins:
+      - ${FRONTEND_ORIGIN:https://myapp.example.com}
+
+  proxy:
+    backend-url: ${BACKEND_URL:http://localhost:8080}
+    connect-timeout-ms: 5000
+    read-timeout-ms: 30000
+
+  headers:
+    content-security-policy: >
+      default-src 'self';
+      script-src 'self';
+      style-src 'self' 'unsafe-inline';
+      img-src 'self' data: https:;
+      font-src 'self';
+      connect-src 'self';
+      frame-ancestors 'none';
+      form-action 'self';
+      base-uri 'self';
+      object-src 'none'
+
+    permissions-policy: >
+      accelerometer=(),
+      camera=(),
+      geolocation=(),
+      gyroscope=(),
+      magnetometer=(),
+      microphone=(),
+      payment=(),
+      usb=()
+
+# ── Actuator (separate port) ─────────────────────────────────────────────
+management:
+  server:
+    port: 9091
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: when-authorized
+      probes:
+        enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+# ── Logging ──────────────────────────────────────────────────────────────
+logging:
+  level:
+    root: WARN
+    com.bff: INFO
+    org.springframework.security: WARN
+    org.springframework.web: WARN
